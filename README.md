@@ -3,8 +3,8 @@
 ## Instructions
 
 - Have python3 installed
-- File run.py cointais example maps, to test your own add new ones or modify current ones. Map is passed to program via constructor
-- Run program using ``` python run.py ```
+- File run.py contains example maps. To test your own, add new ones, or modify current ones. The map is passed to the program via the constructor
+- Run the program using ``` python run.py ```
 - Run test using ``` python -m pytest test_PathTraversal.py ```
 
 
