@@ -1,5 +1,15 @@
 # [Software Sauna](https://www.softwaresauna.com/) Code Challenge
 
+## Instructions
+
+- Have python3 installed
+- File run.py cointais example maps, to test your own add new ones or modify current ones. Map is passed to program via constructor
+- Run program using ``` python run.py ```
+- Run test using ``` python -m pytest test_PathTraversal.py ```
+
+
+## Task
+
 Follow a path of characters & collect letters:
 
 - Start at the character `@`
