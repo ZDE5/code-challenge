@@ -25,7 +25,6 @@ class PathTraversal:
 
         for row in self.map:
             if not all(char in allowed_characters for char in row):
-                breakpoint()
                 return False
             at_count += row.count("@")
             x_count += row.count("x")
@@ -129,12 +128,10 @@ class PathTraversal:
         if current_char.isupper():
             if new_direction == direction:
                 if not (allowed_directions in [1, 3]):
-                    breakpoint()
                     raise Exception("There is a fork in path")
 
             else:
                 if not (allowed_directions == 1):
-                    breakpoint()
                     raise Exception("There is a fork in path")
 
         if current_char == "+":
@@ -143,7 +140,6 @@ class PathTraversal:
 
             else:
                 if allowed_directions != 1:
-                    breakpoint()
                     raise Exception("There is a fork in path")
 
         return new_position, new_direction
