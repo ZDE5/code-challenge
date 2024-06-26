@@ -145,6 +145,8 @@ class PathTraversal:
         return new_position, new_direction
 
     def __str__(self):
+        if len(self.characters) == 0:
+            return "Path traversal was not initiated!"
         return (
             "Letters "
             + "".join(self.characters)

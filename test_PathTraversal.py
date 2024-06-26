@@ -203,3 +203,30 @@ def test_validate_map():
     path_traverser = PathTraversal(map_data_valid)
     valid = path_traverser.validate_map()
     assert valid
+
+
+def test_path_traversal_str_not_traversed():
+    map_data = [
+        "  @---A---+    ",
+        "          |    ",
+        "  x-B-+   C    ",
+        "      |   |    ",
+        "      +---+    ",
+    ]
+    path_traverser = PathTraversal(map_data)
+    assert str(path_traverser) == "Path traversal was not initiated!"
+
+
+def test_path_traversal_str_traversed():
+    map_data = [
+        "  @---A---+    ",
+        "          |    ",
+        "  x-B-+   C    ",
+        "      |   |    ",
+        "      +---+    ",
+    ]
+    path_traverser = PathTraversal(map_data)
+    path_traverser.characters = list("ACB")
+    path_traverser.path = list("@---A---+|C|+---+|+-B-x")
+    assert str(path_traverser) == ("Letters ACB\n"
+        + "Path as characters @---A---+|C|+---+|+-B-x")
