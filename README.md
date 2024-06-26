@@ -5,6 +5,7 @@
 - Have python3 installed
 - File run.py contains example maps. To test your own, add new ones, or modify current ones. The map is passed to the program via the constructor
 - Run the program using ``` python run.py ```
+- To run test install pytest from pip ``` pip install -r requirements.txt ```
 - Run test using ``` python -m pytest test_PathTraversal.py ```
 
 
