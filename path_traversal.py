@@ -5,7 +5,7 @@ class PathTraversal:
     def __init__(self, map: List[str]):
         """
         Initializes the PathTraversal object with a map represented as a list of strings.
-        
+
         Args:
         - map (List[str]): A list where each element is a string representing a row in the map.
         """
@@ -19,25 +19,24 @@ class PathTraversal:
     def prepare_map(self):
         """
         Prepares the map for traversal by finding the starting point and validating the map.
-        
+
         Raises:
         - Exception: If the map contains invalid characters, multiple starting points, or no starting point.
         """
         try:
             self.starting_position = self.find_starting_point()
-            self.validate_map()            
+            self.validate_map()
         except Exception:
             raise
-        
 
     def validate_map(self):
         """
         Validates the map to ensure it contains exactly one starting point '@' and one ending point 'x',
         and only contains allowed characters.
-        
+
         Raises:
         - Exception: If the map contains invalid characters or incorrect counts of '@' or 'x'.
-        
+
         Returns:
         - bool: True if the map is valid, otherwise raises an exception.
         """
@@ -45,9 +44,7 @@ class PathTraversal:
         x_count = 0
 
         allowed_characters = {"@", "x", "-", "|", "+", " "}
-        allowed_characters.update(
-            chr(c) for c in range(ord("A"), ord("Z") + 1)
-        )
+        allowed_characters.update(chr(c) for c in range(ord("A"), ord("Z") + 1))
 
         for row in self.map:
             if not all(char in allowed_characters for char in row):
@@ -65,10 +62,10 @@ class PathTraversal:
     def find_starting_point(self):
         """
         Finds the starting point '@' in the map and returns its coordinates (row, column).
-        
+
         Returns:
         - tuple: Coordinates (row, column) of the starting point '@'.
-        
+
         Raises:
         - Exception: If no starting point '@' is found in the map.
         """
@@ -84,21 +81,18 @@ class PathTraversal:
     def traverse_path(self, position, direction):
         """
         Recursively traverses the map path starting from the given position and direction.
-        
+
         Args:
         - position (tuple): Coordinates (row, column) of the current position in the map.
         - direction (int or None): Current direction of traversal (0: up, 1: left, 2: right, 3: down).
-        
+
         Raises:
         - Exception: If the traversal encounters an invalid path or a fork in the path.
         """
         current_char = self.map[position[0]][position[1]]
         self.path.append(current_char)
 
-        if (
-            current_char.isupper() and
-            position not in self.chars_control
-        ):
+        if current_char.isupper() and position not in self.chars_control:
             self.characters.append(current_char)
             self.chars_control[position] = current_char
 
@@ -113,16 +107,16 @@ class PathTraversal:
     def find_next_position(self, current_char, position, direction):
         """
         Determines the next valid position and direction to traverse based on the current position and direction.
-        
+
         Args:
         - current_char (str): Current character at the given position in the map.
         - position (tuple): Coordinates (row, column) of the current position in the map.
         - direction (int or None): Current direction of traversal (0: up, 1: left, 2: right, 3: down).
-        
+
         Returns:
         - tuple: Coordinates (row, column) of the next valid position to traverse.
         - int: Updated direction of traversal after determining the next position.
-        
+
         Raises:
         - Exception: If there is no valid next position found based on the current position and direction.
         """
@@ -156,9 +150,7 @@ class PathTraversal:
                 ):
                     continue
                 if new_position:
-                    raise Exception(
-                        "There is multiple directions from starting point!"
-                    )
+                    raise Exception("There is multiple directions from starting point!")
                 new_position = (new_x, new_y)
                 new_direction = step
 
@@ -210,7 +202,7 @@ class PathTraversal:
     def __str__(self):
         """
         Returns a string representation of the PathTraversal object in given format, showing the traversed letters and path as characters.
-        
+
         Returns:
         - str: String representation of the PathTraversal object.
         """

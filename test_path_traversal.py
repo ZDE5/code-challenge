@@ -228,8 +228,9 @@ def test_path_traversal_str_traversed():
     path_traverser = PathTraversal(map_data)
     path_traverser.characters = list("ACB")
     path_traverser.path = list("@---A---+|C|+---+|+-B-x")
-    assert str(path_traverser) == ("Letters ACB\n"
-        + "Path as characters @---A---+|C|+---+|+-B-x")
+    assert str(path_traverser) == (
+        "Letters ACB\n" + "Path as characters @---A---+|C|+---+|+-B-x"
+    )
 
 
 def test_find_starting_point():
@@ -241,8 +242,7 @@ def test_find_starting_point():
         "      +---+    ",
     ]
     path_traverser = PathTraversal(map_data)
-    assert (0,2) == path_traverser.find_starting_point()
-
+    assert (0, 2) == path_traverser.find_starting_point()
 
 
 def test_find_starting_point_invalid():
