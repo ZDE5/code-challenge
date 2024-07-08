@@ -1,5 +1,5 @@
 import pytest
-from PathTraversal import PathTraversal
+from path_traversal import PathTraversal
 
 
 @pytest.mark.parametrize(
@@ -95,7 +95,7 @@ def test_traverse_path_valid(map_data, letters, path):
                 "      |   |    ",
                 "      +---+    ",
             ],
-            "Map is not valid",
+            "Starting point is missing!",
         ),
         (
             [
@@ -105,7 +105,7 @@ def test_traverse_path_valid(map_data, letters, path):
                 "      |   |    ",
                 "      +---+    ",
             ],
-            "Map is not valid",
+            "Number of ending points is different from 1!",
         ),
         (
             [
@@ -115,7 +115,7 @@ def test_traverse_path_valid(map_data, letters, path):
                 "      |   |    ",
                 "      +---+    ",
             ],
-            "Map is not valid",
+            "Number of starting points is different from 1!",
         ),
         (
             [
@@ -125,7 +125,7 @@ def test_traverse_path_valid(map_data, letters, path):
                 "          x    ",
                 "      @-B-+    ",
             ],
-            "Map is not valid",
+            "Number of starting points is different from 1!",
         ),
         (
             [
@@ -135,7 +135,7 @@ def test_traverse_path_valid(map_data, letters, path):
                 "      |        ",
                 "      @        ",
             ],
-            "Map is not valid",
+            "Number of starting points is different from 1!",
         ),
         (
             [
@@ -147,7 +147,7 @@ def test_traverse_path_valid(map_data, letters, path):
                 "      |   |    ",
                 "      +---+    ",
             ],
-            "Map is not valid",
+            "Number of ending points is different from 1!",
         ),
         (
             [
@@ -158,7 +158,7 @@ def test_traverse_path_valid(map_data, letters, path):
             ],
             "Not a valid path",
         ),
-        (["  x-B-@-A-x    "], "Map is not valid"),
+        (["  x-B-@-A-x    "], "Number of ending points is different from 1!"),
         (["  @-A-+-B-x    "], "Fake turn"),
     ],
 )
@@ -188,7 +188,7 @@ def test_prepare_map_invalid():
         "      |   |    ",
         "      +---+    ",
     ]
-    with pytest.raises(Exception, match="Map is not valid"):
+    with pytest.raises(Exception, match="Starting point is missing!"):
         PathTraversal(map_data)
 
 
@@ -230,3 +230,30 @@ def test_path_traversal_str_traversed():
     path_traverser.path = list("@---A---+|C|+---+|+-B-x")
     assert str(path_traverser) == ("Letters ACB\n"
         + "Path as characters @---A---+|C|+---+|+-B-x")
+
+
+def test_find_starting_point():
+    map_data = [
+        "  @---A---+    ",
+        "          |    ",
+        "  x-B-+   C    ",
+        "      |   |    ",
+        "      +---+    ",
+    ]
+    path_traverser = PathTraversal(map_data)
+    assert (0,2) == path_traverser.find_starting_point()
+
+
+
+def test_find_starting_point_invalid():
+    map_data = [
+        "  @---A---+    ",
+        "          |    ",
+        "  x-B-+   C    ",
+        "      |   |    ",
+        "      +---+    ",
+    ]
+    path_traverser = PathTraversal(map_data)
+    path_traverser.map = path_traverser.map[0].replace("@", " ")
+    with pytest.raises(Exception, match="Starting point is missing!"):
+        path_traverser.find_starting_point()
